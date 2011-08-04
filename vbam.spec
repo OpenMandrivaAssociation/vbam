@@ -48,7 +48,6 @@ install -m 644 debian/vbam.1 %{buildroot}%{_mandir}/man1
 #xdg menu
 desktop-file-install --vendor="" \
   --remove-category="Application" \
-  --remove-category="Game" \
   --remove-key="Encoding" \
   --add-category="X-MandrivaLinux-MoreApplications-Emulators" \
   --dir %{buildroot}%{_datadir}/applications/ \
