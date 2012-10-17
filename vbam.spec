@@ -18,7 +18,7 @@ BuildRequires:	libglademm2.4-devel
 BuildRequires:	portaudio-devel
 BuildRequires:	gtkmm2.4-devel
 BuildRequires:	ffmpeg-devel
-BuildRequires:	desktop-file-utils
+BuildRequires:	desktop-file-utils csfml-audio-devel sfml2-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
