@@ -1,25 +1,26 @@
-%define revision	1097
+%define revision	1054
 
-Name:			vbam
-Version:		1.8.0.%{revision}
-Release:		%mkrel 1
+Name:		vbam
+Version:	1.8.0.%{revision}
+Release:	2
 
 Summary:	A GameBoy Advance emulator
 License:	GPLv2+
 Group:		Emulators
 URL:		http://sourceforge.net/projects/vbam
-Source0:	http://sourceforge.net/projects/vbam/files/VBA-M%20svn%20r%{revision}/%{name}-%{version}.tar.xz
+Source0:	http://sourceforge.net/projects/vbam/files/VBA-M%20svn%20r%{revision}/%{name}-%{version}-src.tar.gz
 Patch0:		vbam-1.8.0-glibc2.10-fix.patch
+Patch1:		vbam-1.8.0.1054-zlib.patch
+Patch2:		vbam-1.8.0.1054-ffmpeg.patch
 
 BuildRequires:	cmake
-BuildRequires:	SDL-devel
-BuildRequires:	gtkglextmm-devel
-BuildRequires:	libglademm2.4-devel
-BuildRequires:	portaudio-devel
-BuildRequires:	gtkmm2.4-devel
+BuildRequires:	pkgconfig(sdl)
+BuildRequires:	pkgconfig(gtkglextmm-1.2)
+BuildRequires:	pkgconfig(libglademm-2.4)
+BuildRequires:	pkgconfig(portaudio-2.0)
+BuildRequires:	pkgconfig(gtkmm-2.4)
 BuildRequires:	ffmpeg-devel
-BuildRequires:	desktop-file-utils sfml-network-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}
+BuildRequires:	desktop-file-utils
 
 %description
 VisualBoyAdvance-M is a GameBoy Advance emulator.
@@ -31,6 +32,8 @@ It also features a GTK frontend.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 cmake . -DCMAKE_INSTALL_PREFIX:PATH=%{_prefix} -DENABLE_WX=OFF
@@ -38,7 +41,6 @@ cmake . -DCMAKE_INSTALL_PREFIX:PATH=%{_prefix} -DENABLE_WX=OFF
 %make
 
 %install
-%__rm -rf %{buildroot}
 %makeinstall_std
 
 #man page
@@ -55,11 +57,7 @@ desktop-file-install --vendor="" \
 
 %find_lang g%{name}
 
-%clean
-%__rm -rf %{buildroot}
-
 %files -f g%{name}.lang
-%defattr(-,root,root)
 %doc doc/ReadMe.SDL.txt doc/DevInfo.txt
 %{_bindir}/*vbam
 %config(noreplace) %{_sysconfdir}/vbam.cfg
@@ -71,7 +69,7 @@ desktop-file-install --vendor="" \
 
 
 %changelog
-* Fri Jan 06 2012 Andrey Bondrov <abondrov@mandriva.org> 1.8.0.1054-1mdv2012.0
+* Fri Jan 06 2012 Andrey Bondrov <abondrov@mandriva.org> 1.8.0.1054-1mdv2011.0
 + Revision: 758025
 - New version 1.8.0.1054
 - Do not remove Game category
