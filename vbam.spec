@@ -1,17 +1,15 @@
-%define revision	1054
+%define revision	1159
 
 Name:		vbam
 Version:	1.8.0.%{revision}
-Release:	2
+Release:	1
 
 Summary:	A GameBoy Advance emulator
 License:	GPLv2+
 Group:		Emulators
 URL:		http://sourceforge.net/projects/vbam
-Source0:	http://sourceforge.net/projects/vbam/files/VBA-M%20svn%20r%{revision}/%{name}-%{version}-src.tar.gz
+Source0:	http://sourceforge.net/projects/vbam/files/VBA-M%20svn%20r%{revision}/%{name}-%{version}-src.tar.bz2
 Patch0:		vbam-1.8.0-glibc2.10-fix.patch
-Patch1:		vbam-1.8.0.1054-zlib.patch
-Patch2:		vbam-1.8.0.1054-ffmpeg.patch
 
 BuildRequires:	cmake
 BuildRequires:	pkgconfig(sdl)
@@ -20,6 +18,10 @@ BuildRequires:	pkgconfig(libglademm-2.4)
 BuildRequires:	pkgconfig(portaudio-2.0)
 BuildRequires:	pkgconfig(gtkmm-2.4)
 BuildRequires:	ffmpeg-devel
+BuildRequires:	sfml-graphics-devel
+BuildRequires:	sfml-network-devel
+BuildRequires:	sfml-system-devel
+BuildRequires:	sfml-window-devel
 BuildRequires:	desktop-file-utils
 
 %description
@@ -30,10 +32,8 @@ features from the various other forks.
 It also features a GTK frontend.
 
 %prep
-%setup -q
+%setup -q -c
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
 
 %build
 cmake . -DCMAKE_INSTALL_PREFIX:PATH=%{_prefix} -DENABLE_WX=OFF
@@ -67,32 +67,3 @@ desktop-file-install --vendor="" \
 %{_mandir}/man1/*
 
 
-
-%changelog
-* Fri Jan 06 2012 Andrey Bondrov <abondrov@mandriva.org> 1.8.0.1054-1mdv2011.0
-+ Revision: 758025
-- New version 1.8.0.1054
-- Do not remove Game category
-
-* Fri Jul 29 2011 Andrey Bondrov <abondrov@mandriva.org> 1.8.0.1029-1
-+ Revision: 692201
-- imported package vbam
-
-
-* Mon Jul 18 2011 Andrey Bondrov <bondrov@math.dvgu.ru> 1.8.0.1029-1mdv2011.0
-- New snapshot
-- Fix group
-- Rediff patch 0
-- Remove PLF references
-
-* Fri Sep 11 2009 Guillaume Bedot <littletux@zarb.org> 1.8.0-0.svn905.1plf2010.0
-- new snapshot
-
-* Sat Apr 18 2009 Guillaume Bedot <littletux@zarb.org> 1.8.0-0.svn877.1plf2009.1
-- new snapshot
-
-* Fri Jan  9 2009 Guillaume Bedot <littletux@zarb.org> 1.8.0-0.svn847.1plf2009.1
-- new snapshot
-
-* Wed Oct 22 2008 Guillaume Bedot <littletux@zarb.org> 1.8.0-0.svn775.1plf2009.1
-- First PLF package for vbam
