@@ -2,7 +2,7 @@
 
 Name:		vbam
 Version:	1.8.0.%{revision}
-Release:	1
+Release:	2
 
 Summary:	A GameBoy Advance emulator
 License:	GPLv2+
