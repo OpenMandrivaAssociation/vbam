@@ -7,7 +7,7 @@ Release:	2
 Summary:	A GameBoy Advance emulator
 License:	GPLv2+
 Group:		Emulators
-URL:		http://sourceforge.net/projects/vbam
+URL:		https://sourceforge.net/projects/vbam
 Source0:	http://sourceforge.net/projects/vbam/files/VBA-M%20svn%20r%{revision}/%{name}-%{version}-src.tar.bz2
 Patch0:		vbam-1.8.0-glibc2.10-fix.patch
 
